@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yazılım içerik üreticileri için fikir, format ve büyüme analiz aracı.">
+  <title>KodRadar — İçerik Büyüme Stüdyosu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#dashboard" aria-label="KodRadar ana sayfa">
+      <span class="brand-mark">KR</span>
+      <span><strong>KodRadar</strong><small>İçerik Büyüme Stüdyosu</small></span>
+    </a>
+    <nav aria-label="Ana menü">
+      <button class="nav-link active" data-view="dashboard">Panel</button>
+      <button class="nav-link" data-view="analyzer">Fikir Analizi</button>
+      <button class="nav-link" data-view="generator">İçerik Üret</button>
+      <button class="nav-link" data-view="library">Viral Arşiv</button>
+      <button class="nav-link" data-view="planner">Plan</button>
+    </nav>
+    <button id="themeToggle" class="icon-button" aria-label="Temayı değiştir">◐</button>
+  </header>
+
+  <main>
+    <section id="dashboard" class="view active-view">
+      <div class="hero-panel">
+        <div>
+          <span class="eyebrow">@cagrikod için kişiselleştirildi</span>
+          <h1>Viral tesadüfleri<br><em>tekrarlanabilir sisteme</em> çevir.</h1>
+          <p>Fikrini yaz. KodRadar, geçmişte çalışan formatlarınla karşılaştırıp erişim, marka uyumu ve müşteri potansiyelini puanlasın.</p>
+          <button class="primary" data-go="analyzer">Yeni fikri analiz et <span>→</span></button>
+        </div>
+        <div class="goal-card">
+          <div class="goal-head"><span>10K hedefi</span><strong id="goalPercent">7,8%</strong></div>
+          <div class="goal-number"><strong id="currentFollowers">776</strong><span>/ 10.000 takipçi</span></div>
+          <div class="progress"><i id="goalBar"></i></div>
+          <div class="live-row"><span id="liveStatus" class="live-badge">● Canlı veri bekleniyor</span><button id="refreshLive" type="button">Yenile</button></div>
+          <small>Hedefe <b id="remainingFollowers">9.224</b> kişi kaldı.</small>
+          <div class="eta-box"><span>Tahmini 10K tarihi</span><strong id="goalEta">Hesaplanıyor…</strong><small id="goalEtaNote">Paylaşım arası ve geçmiş performans hesaba katılır.</small></div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric"><span>En yüksek erişim</span><strong id="liveHighestViews">850,5K</strong><small id="liveHighestTitle">2040 yılında yazılımcılar</small></article>
+        <article class="metric"><span>En güçlü etkileşim</span><strong>%2,80</strong><small>Çözemediğim hatalar</small></article>
+        <article class="metric"><span>Canlı içerik sayısı</span><strong id="livePostCount">19</strong><small>Görüntülenmeler arşivde güncellenir</small></article>
+        <article class="metric warning"><span>Son paylaşım arası</span><strong id="hiatusDays">—</strong><small>İlk içeriklerde yeniden ısınma etkisi beklenir</small></article>
+      </div>
+
+      <div class="dashboard-grid">
+        <article class="panel chart-panel">
+          <div class="panel-head"><div><span class="eyebrow">19 gönderilik geçmiş</span><h2>İzlenme yolculuğu</h2></div><span class="legend"><i></i> İzlenme</span></div>
+          <div id="performanceChart" class="chart" aria-label="Gönderilere göre izlenme grafiği"></div>
+          <p class="insight"><b>Teşhis:</b> İlk üç skeç toplam 1,79 milyon izlenme aldı. Düşüş, kısa videodan uzun videoya geçişten değil; hikâyeli “yazılımcı evreni” formatının bırakılmasından sonra başladı.</p>
+        </article>
+
+        <article class="panel recipe-panel">
+          <span class="eyebrow">Senin viral reçeten</span>
+          <h2>5 zorunlu bileşen</h2>
+          <ol>
+            <li><b>Karakter</b><span>Junior, senior, müşteri veya geleceğin yazılımcısı</span></li>
+            <li><b>Görsel nesne</b><span>MacBook, telefon, araç, kod ekranı</span></li>
+            <li><b>Ortak acı</b><span>Bug, revize, ödeme, iş arama, AI korkusu</span></li>
+            <li><b>Fiziksel aksiyon</b><span>İlk saniyede hareket ve merak</span></li>
+            <li><b>Ters köşe</b><span>İzleyicinin beklemediği net final</span></li>
+          </ol>
+        </article>
+      </div>
+
+      <div class="profile-audit panel">
+        <div class="panel-head"><div><span class="eyebrow">Dönüşüm altyapısı</span><h2>Profil, bio ve öne çıkanlar denetimi</h2></div><span id="profileScore" class="audit-score">61/100</span></div>
+        <div class="audit-grid">
+          <article><span class="audit-state improve">Düzelt</span><h3>İsim alanı</h3><p>Aramada bulunmak için yalnızca isim değil, kategori de bulunmalı.</p><code>Çağrı Koç | Yazılım Mentörü</code></article>
+          <article><span class="audit-state improve">Düzelt</span><h3>Biyografi</h3><p>Kime, hangi sonuçla yardımcı olduğun ve tek CTA açık olmalı.</p><code>Junior geliştiricilere yol haritası ve portföy desteği<br>GitHub • Kariyer • Freelance<br>1:1 mentörlük başvurusu ↓</code></article>
+          <article><span class="audit-state missing">Eksik</span><h3>Öne çıkanlar</h3><p>Ziyaretçi güvenini profil üzerinde tamamla.</p><code>BAŞLA · SONUÇLAR · MENTÖRLÜK · SSS · HAKKIMDA</code></article>
+          <article><span class="audit-state good">Koru</span><h3>Sabit gönderiler</h3><p>Üç gönderiyi müşteri yolculuğuna göre sabitle.</p><code>1. Kimlere yardım ediyorum<br>2. Ücretsiz profil incelemesi<br>3. Mentörlük sonucu</code></article>
+        </div>
+        <div class="audit-details">
+          <details open>
+            <summary><span>01</span><div><b>İsim alanı ve kullanıcı adı</b><small>Arama sonuçlarında bulunma</small></div><i>+</i></summary>
+            <div class="detail-body">
+              <div><h4>Ne yapmalısın?</h4><ol><li>Instagram → Profili Düzenle → Ad alanını aç.</li><li>Adının yanına insanların aradığı “Yazılım Mentörü” ifadesini ekle.</li><li><b>@cagrikod</b> kullanıcı adını değiştirme; kısa ve akılda kalıcı.</li></ol></div>
+              <div class="ready-copy"><span>Hazır metin</span><p>Çağrı Koç | Yazılım Mentörü</p><button class="copy-ready" data-copy="Çağrı Koç | Yazılım Mentörü">Kopyala</button></div>
+            </div>
+          </details>
+          <details>
+            <summary><span>02</span><div><b>Biyografi</b><small>Kime yardım ettiğin + sonuç + tek CTA</small></div><i>+</i></summary>
+            <div class="detail-body">
+              <div><h4>Ne yapmalısın?</h4><ol><li>“Yazılım projeleriniz için DM” gibi geniş ifadeyi kaldır.</li><li>Ana müşteriyi junior geliştirici olarak netleştir.</li><li>DM ve formu aynı anda isteme; tek hedef başvuru formu olsun.</li><li>Linkin ilk ekranında “Mentörlük başvurusu” yazmalı.</li></ol></div>
+              <div class="ready-copy"><span>Önerilen bio</span><p>Junior geliştiricilere yol haritası ve portföy desteği<br>GitHub • Kariyer • Freelance<br>1:1 mentörlük başvurusu ↓</p><button class="copy-ready" data-copy="Junior geliştiricilere yol haritası ve portföy desteği%0AGitHub • Kariyer • Freelance%0A1:1 mentörlük başvurusu ↓">Kopyala</button></div>
+            </div>
+          </details>
+          <details>
+            <summary><span>03</span><div><b>Öne çıkan hikâyeler</b><small>Her klasöre ne koyacağın</small></div><i>+</i></summary>
+            <div class="highlight-plan">
+              <article><b>BAŞLA</b><p>Sen kimsin, kimlere yardım ediyorsun, takipçi burada ne bulacak?</p><small>3 hikâye</small></article>
+              <article><b>MENTÖRLÜK</b><p>Programın süresi, kapsamı, görüşme düzeni ve kimlere uygun olduğu.</p><small>5–7 hikâye</small></article>
+              <article><b>SONUÇLAR</b><p>İzinli öğrenci yorumları, önce/sonra profilleri ve tamamlanan projeler.</p><small>Sürekli güncelle</small></article>
+              <article><b>İNCELEME</b><p>GitHub, CV ve portföy analizlerinden kısa örnekler.</p><small>4–6 hikâye</small></article>
+              <article><b>SSS</b><p>Fiyat, seviye, süre, görüşme ve destek hakkında cevaplar.</p><small>5 hikâye</small></article>
+              <article><b>HAKKIMDA</b><p>Deneyimin, projelerin ve neden mentörlük verdiğin.</p><small>3–5 hikâye</small></article>
+            </div>
+          </details>
+          <details>
+            <summary><span>04</span><div><b>Sabit gönderiler</b><small>Üç gönderinin hazır yapısı</small></div><i>+</i></summary>
+            <div class="pinned-plan">
+              <article><span>1</span><div><b>“Buradaysan muhtemelen yazılımda ne yapacağını bilmiyorsun.”</b><p>Kimlere yardım ettiğini, sayfada ne paylaşacağını ve takipçinin kazanacağı sonucu anlat. Son CTA: “Takip et ve BAŞLA öne çıkanına bak.”</p></div></article>
+              <article><span>2</span><div><b>“Bir junior’ın GitHub’ını 60 saniyede düzeltiyorum.”</b><p>Gerçek veya anonim bir profili incele. Somut üç hata ve düzeltilmiş hâli göster. CTA: “Profilini incelemem için İNCELE yaz.”</p></div></article>
+              <article><span>3</span><div><b>“6 haftalık mentörlükte ne değişiyor?”</b><p>Başlangıç analizi → yol haritası → proje → GitHub/CV çıktısını göster. CTA: “Uygunluk görüşmesi için formu doldur.”</p></div></article>
+            </div>
+          </details>
+          <details>
+            <summary><span>05</span><div><b>Bağlantı ve başvuru formu</b><small>Profil ziyaretini müşteriye çevirme</small></div><i>+</i></summary>
+            <div class="detail-body">
+              <div><h4>Formda bulunması gerekenler</h4><ol><li>Mevcut seviye ve öğrendiği teknolojiler</li><li>Hedefi: iş, staj, freelance veya proje</li><li>Şu ana kadar yaptığı projelerin bağlantıları</li><li>Haftalık ayırabileceği süre</li><li>En büyük tıkanma noktası</li><li>Programdan beklentisi ve bütçe uygunluğu</li></ol></div>
+              <div class="ready-copy"><span>Link düğmesi metni</span><p>Ücretsiz ön değerlendirme ve mentörlük başvurusu</p><button class="copy-ready" data-copy="Ücretsiz ön değerlendirme ve mentörlük başvurusu">Kopyala</button></div>
+            </div>
+          </details>
+          <details>
+            <summary><span>06</span><div><b>Profil fotoğrafı ve görsel düzen</b><small>İlk bakışta güven</small></div><i>+</i></summary>
+            <div class="detail-body">
+              <div><h4>Kontrol listesi</h4><ol><li>Yakın plan ve aydınlık yüz fotoğrafı kullan.</li><li>Karmaşık arka planı kaldır; tek renk veya sade ofis tercih et.</li><li>Öne çıkan kapaklarında aynı renk ve tek kelimelik başlık kullan.</li><li>Reels kapaklarında 4–7 kelimelik büyük kanca ve yüz/nesne kullan.</li></ol></div>
+              <div class="ready-copy"><span>Kapak sistemi</span><p>Siyah zemin · Asit yeşili vurgu · Beyaz büyük başlık · Tek yüz veya tek nesne</p></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="analyzer" class="view">
+      <div class="section-title"><span class="eyebrow">Yayınlamadan önce kontrol et</span><h1>Video fikri analizörü</h1><p>Fikrin ne kadar viral, markana uygun ve paraya dönüşebilir?</p></div>
+      <div class="tool-grid">
+        <form id="ideaForm" class="panel form-panel">
+          <label>Video fikri<textarea id="ideaText" rows="5" placeholder="Örn: Müşteri 'ufak bir revize' deyince yazılımcının eve kamyon çağırması" required></textarea></label>
+          <div class="two-col">
+            <label>Format<select id="formatSelect"><option value="sketch">Hikâyeli skeç</option><option value="meme">Kısa meme</option><option value="education">Öğretici</option><option value="review">Profil incelemesi</option><option value="vlog">Vlog</option><option value="sales">Mentörlük teklifi</option></select></label>
+            <label>Tahmini süre<input id="durationInput" type="number" value="24" min="3" max="180"><span class="field-unit">sn</span></label>
+          </div>
+          <label>İlk ekranda yazacak kanca<input id="hookInput" type="text" placeholder="Müşteri 'ufak revize' deyince"></label>
+          <label>Videonun finali<textarea id="endingInput" rows="3" placeholder="Kamyonun kasasından onlarca revize dosyası iner"></textarea></label>
+          <label>Hedeflenen aksiyon<select id="ctaSelect"><option value="share">Paylaşım / arkadaşına gönderme</option><option value="comment">Yorum / anahtar kelime</option><option value="save">Kaydetme</option><option value="follow">Takip</option><option value="sale">Mentörlük başvurusu</option></select></label>
+          <button class="primary wide" type="submit">Fikri puanla <span>↗</span></button>
+        </form>
+
+        <div id="analysisEmpty" class="panel empty-state"><div class="radar-icon">◎</div><h2>Fikrin burada analiz edilecek</h2><p>Kanca, görsel aksiyon, hikâye, hedef kitle, marka uyumu ve gelir potansiyeli ayrı ayrı değerlendirilecek.</p></div>
+        <div id="analysisResult" class="panel result-panel hidden" aria-live="polite">
+          <div class="score-wrap"><div id="scoreCircle" class="score-circle"><strong id="totalScore">0</strong><span>/100</span></div><div><span id="scoreLabel" class="status-chip">Analiz</span><h2 id="resultTitle">Sonuç</h2><p id="resultSummary"></p></div></div>
+          <div id="scoreBars" class="score-bars"></div>
+          <div class="result-block"><h3>En kritik düzeltmeler</h3><ul id="fixList"></ul></div>
+          <div class="result-block script-block"><div><h3>Önerilen açılış</h3><button id="copyScript" class="text-button" type="button">Kopyala</button></div><p id="scriptSuggestion"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="generator" class="view">
+      <div class="section-title"><span class="eyebrow">Sayfanın yapısını bozmadan</span><h1>İçerik üretici</h1><p>Geçmişte çalışan karakter ve anlatı kalıplarından yeni senaryolar çıkar. Kesin izlenme uydurmaz; her fikrin viral sinyallerini ve risklerini açıklar.</p></div>
+      <div class="generator-controls panel">
+        <div class="control-group"><span>Ana hedef</span><div class="chips" id="goalChips"><button class="chip active" data-value="reach">Erişim</button><button class="chip" data-value="authority">Otorite</button><button class="chip" data-value="lead">Mentörlük müşterisi</button></div></div>
+        <div class="control-group"><span>Konu</span><div class="chips" id="topicChips"><button class="chip active" data-value="junior">Junior hayatı</button><button class="chip" data-value="ai">Yapay zekâ</button><button class="chip" data-value="freelance">Freelance</button><button class="chip" data-value="bug">Bug / debugging</button><button class="chip" data-value="career">Kariyer</button></div></div>
+        <button id="generateIdeas" class="primary">3 yeni fikir üret <span>✦</span></button>
+      </div>
+      <div id="ideaCards" class="idea-grid"></div>
+    </section>
+
+    <section id="library" class="view">
+      <div class="section-title"><span class="eyebrow">Gerçek hesap verisi</span><h1>Viral içerik arşivi</h1><p>Gönderilerin performansını, formatını ve öğrenimini karşılaştır. Canlı çekilebilen değerler otomatik güncellenir.</p></div>
+      <div class="library-toolbar panel"><input id="librarySearch" type="search" placeholder="İçerik ara..."><select id="libraryFilter"><option value="all">Tüm performanslar</option><option value="viral">Viral (50K+)</option><option value="mid">Orta (10K–50K)</option><option value="low">Düşük (&lt;10K)</option></select></div>
+      <div id="libraryTable" class="panel table-wrap"></div>
+    </section>
+
+    <section id="planner" class="view">
+      <div class="section-title"><span class="eyebrow">30 günlük sprint</span><h1>İçerik ve gelir planı</h1><p>Her içerik farklı bir işi yapar: erişim, güven veya dönüşüm.</p></div>
+      <div class="funnel panel">
+        <div><span>1</span><b>Skeç</b><small>Yeni izleyici</small></div><i>→</i><div><span>2</span><b>Uzmanlık</b><small>Güven</small></div><i>→</i><div><span>3</span><b>Vaka</b><small>Kanıt</small></div><i>→</i><div><span>4</span><b>Başvuru</b><small>Gelir</small></div>
+      </div>
+      <div id="calendar" class="calendar"></div>
+      <div class="plan-actions"><button id="resetPlan" class="secondary">Planı sıfırla</button><button id="exportPlan" class="primary">Planı indir <span>↓</span></button></div>
+    </section>
+  </main>
+
+  <footer><span>KodRadar</span><p>Instagram'ın özel algoritmasına erişmez; senin performans geçmişin ve gözlemlenebilir içerik sinyalleriyle karar desteği verir.</p></footer>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
