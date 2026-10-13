@@ -20,9 +20,9 @@ function parseFollowers(source) {
 }
 
 function parseProfileFollowers(source) {
-  const exact = source.match(/"counts":\{"posts":\d+,"followers":(\d+),"following":\d+\}/);
+  const exact = source.match(/(?:"|\\")counts(?:"|\\"):\{(?:"|\\")posts(?:"|\\"):\d+,(?:"|\\")followers(?:"|\\"):(\d+),(?:"|\\")following(?:"|\\"):\d+\}/);
   if (exact) return Number(exact[1]);
-  const visible = source.match(/title="([\d.,]+)"[^>]*>[\d.,]+<\/strong>\s*[^<]*Followers/i);
+  const visible = source.match(/title="([\d.,]+)"[^>]*>[\d.,]+<\/strong>[\s\S]{0,40}?Followers/i);
   return visible ? Number(visible[1].replace(/[.,]/g, '')) : null;
 }
 
