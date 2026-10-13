@@ -19,6 +19,13 @@ function parseFollowers(source) {
   return null;
 }
 
+function parseProfileFollowers(source) {
+  const exact = source.match(/"counts":\{"posts":\d+,"followers":(\d+),"following":\d+\}/);
+  if (exact) return Number(exact[1]);
+  const visible = source.match(/title="([\d.,]+)"[^>]*>[\d.,]+<\/strong>\s*[^<]*Followers/i);
+  return visible ? Number(visible[1].replace(/[.,]/g, '')) : null;
+}
+
 function normalizePost(post) {
   const details = post.details || {};
   const caption = post.caption || 'Başlıksız içerik';
@@ -61,8 +68,9 @@ export async function GET(request) {
   const username = new URL(request.url).searchParams.get('username') || 'cagrikod';
   if (!/^[A-Za-z0-9._]{1,30}$/.test(username)) return Response.json({ error: 'Geçersiz kullanıcı adı' }, { status: 400 });
   try {
-    const [{ text: instagram }, { text: page }] = await Promise.all([
+    const [{ text: instagram }, { text: profile }, { text: page }] = await Promise.all([
       fetchText(`https://www.instagram.com/${encodeURIComponent(username)}/`),
+      fetchText(`https://peekghost.com/u/${encodeURIComponent(username)}`),
       fetchText(`https://peekghost.com/u/${encodeURIComponent(username)}/posts`)
     ]);
     const initial = parseInitialPosts(page);
@@ -70,7 +78,7 @@ export async function GET(request) {
     try { older = await fetchOlderPosts(page, username); } catch (error) { console.error('older_posts_failed', error.message); }
     const unique = new Map([...initial, ...older].filter(post => post.code).map(post => [post.code, post]));
     const posts = [...unique.values()].sort((a, b) => b.timestamp - a.timestamp);
-    return Response.json({ username, followers: parseFollowers(instagram), posts, fetched_at: Math.floor(Date.now() / 1000) }, {
+    return Response.json({ username, followers: parseFollowers(instagram) ?? parseProfileFollowers(profile), posts, fetched_at: Math.floor(Date.now() / 1000) }, {
       headers: { 'cache-control': 'public, s-maxage=300, stale-while-revalidate=600' }
     });
   } catch (error) {
@@ -79,4 +87,4 @@ export async function GET(request) {
   }
 }
 
-export const _test = { parseFollowers, parseInitialPosts, normalizePost };
+export const _test = { parseFollowers, parseProfileFollowers, parseInitialPosts, normalizePost };
